@@ -418,11 +418,135 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="一-封装的意义"><a href="#一-封装的意义" class="headerlink" title="一. 封装的意义"></a>一. 封装的意义</h1><h2 id="1-将属性和行为作为一个整体，表现生活中的事物"><a href="#1-将属性和行为作为一个整体，表现生活中的事物" class="headerlink" title="1. 将属性和行为作为一个整体，表现生活中的事物"></a>1. 将属性和行为作为一个整体，表现生活中的事物</h2><h2 id="2-将属性和行为加以权限控制"><a href="#2-将属性和行为加以权限控制" class="headerlink" title="2. 将属性和行为加以权限控制"></a>2. 将属性和行为加以权限控制</h2><ul>
+                <h2 id="一-封装的意义"><a href="#一-封装的意义" class="headerlink" title="一. 封装的意义"></a>一. 封装的意义</h2><h3 id="1-将属性和行为作为一个整体，表现生活中的事物"><a href="#1-将属性和行为作为一个整体，表现生活中的事物" class="headerlink" title="1. 将属性和行为作为一个整体，表现生活中的事物"></a>1. 将属性和行为作为一个整体，表现生活中的事物</h3><h3 id="2-将属性和行为加以权限控制"><a href="#2-将属性和行为加以权限控制" class="headerlink" title="2. 将属性和行为加以权限控制"></a>2. 将属性和行为加以权限控制</h3><ul>
 <li>语法：class 类名（访问权限：属性/行为）；</li>
 <li>属性使用变量，行为使用函数</li>
 </ul>
-<h2 id="3-属性和行为放在不同的权限中，加以控制"><a href="#3-属性和行为放在不同的权限中，加以控制" class="headerlink" title="3. 属性和行为放在不同的权限中，加以控制"></a>3. 属性和行为放在不同的权限中，加以控制</h2><p>访问权限有三种：public、protected、private</p>
+<h3 id="3-属性和行为放在不同的权限中，加以控制"><a href="#3-属性和行为放在不同的权限中，加以控制" class="headerlink" title="3. 属性和行为放在不同的权限中，加以控制"></a>3. 属性和行为放在不同的权限中，加以控制</h3><p>访问权限有三种：public、protected、private</p>
+<ul>
+<li><p>public：类内外均可访问</p>
+</li>
+<li><p>protected: 类内可以访问，类外不可以访问 儿子可以访问父亲的保护内容</p>
+</li>
+<li><p>private：类内可以访问，类外不可以访问 儿子不可以访问父亲的私有内容</p>
+</li>
+</ul>
+<h2 id="二-class和struct的区别"><a href="#二-class和struct的区别" class="headerlink" title="二. class和struct的区别"></a>二. class和struct的区别</h2><ul>
+<li>struct默认权限为公共</li>
+<li>class默认权限是私有</li>
+</ul>
+<h2 id="三-成员属性设置为私有"><a href="#三-成员属性设置为私有" class="headerlink" title="三. 成员属性设置为私有"></a>三. 成员属性设置为私有</h2><h3 id="1-优点1：将所有成员属性设置为私有，可以控制读写权限"><a href="#1-优点1：将所有成员属性设置为私有，可以控制读写权限" class="headerlink" title="1. 优点1：将所有成员属性设置为私有，可以控制读写权限"></a>1. 优点1：将所有成员属性设置为私有，可以控制读写权限</h3><h3 id="2-优点2：对于写权限，我们可以检测数据的有效性"><a href="#2-优点2：对于写权限，我们可以检测数据的有效性" class="headerlink" title="2. 优点2：对于写权限，我们可以检测数据的有效性"></a>2. 优点2：对于写权限，我们可以检测数据的有效性</h3><h3 id="3-类内给出设置和输出成员变量的函数，主函数可以通过设置函数和输出函数读写成员变量。"><a href="#3-类内给出设置和输出成员变量的函数，主函数可以通过设置函数和输出函数读写成员变量。" class="headerlink" title="3. 类内给出设置和输出成员变量的函数，主函数可以通过设置函数和输出函数读写成员变量。"></a>3. 类内给出设置和输出成员变量的函数，主函数可以通过设置函数和输出函数读写成员变量。</h3><ul>
+<li>如下代码：<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Person
+{
+public:
+	void setName(string name)
+	{
+		m_Age = 0;
+		m_Name = name;
+	}
+	string getName()
+	{
+		return m_Name;
+	}
+	int getAge()
+	{
+		return m_Age;
+	}
+
+	void setAge(int age)
+	{
+		if(age&lt;0||age&gt;150)
+		{
+			m_Age = 0;
+			cout&lt;&lt;"你这个老妖精!"&lt;&lt;endl;
+			return;
+		}
+		m_Age = age;
+	}
+	void setLover(string lover)
+	{
+		m_Lover = lover;
+	}
+private:
+	string m_Name;
+	int m_Age;
+	string m_Lover;
+
+};
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="四-案例–设计立方体类"><a href="#四-案例–设计立方体类" class="headerlink" title="四. 案例–设计立方体类"></a>四. 案例–设计立方体类</h2><ul>
+<li>求出立方体的面积和体积</li>
+<li>分别用全局函数和成员函数判断两个立方体是否相等</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/bainiu2/pictures/main/pictures/image-20230209202331391.png" alt="image-20230209202331391"></p>
+<ul>
+<li>全局函数判断是否相等：</li>
+</ul>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">bool isame(Cube &amp;c1, Cube &amp;c2)
+{
+	if(c1.getL() == c2.getL() &amp;&amp; (c1.getW() == c2.getW() &amp;&amp; (c1.getH() == c2.getH))
+	{
+		return true;
+	}
+       return false;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>成员函数判断是否相等：</li>
+</ul>
+<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Cube
+{
+public:
+	int m_L;
+	int m_W;
+	int m_H;
+	int getL()
+    {
+        return m_L;
+    }
+    int getW()
+    {
+        return m_W;
+    }
+    int getH()
+    {
+        return m_H;
+    }
+    int setL(int l)
+    {
+        m_L = l;
+    }
+     int setW(int w)
+    {
+        m_W = w;
+    }   
+     int setH(int h)
+    {
+        m_H = h;
+    }   
+	int size()
+	{
+		return 2*m_L*m_W+2*m_L*m_H+2*m_W*m_H;
+	}
+	int volume()
+	{
+		return m_W*m_H*m_L;
+	}
+    bool isame(Cube &amp;c)
+    {
+		if(m_L == c.getL() &amp;&amp; m_W == c.getW() &amp;&amp; m_H == c.getH())
+		{
+			return true;
+		}
+       	return false;
+    }
+};<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="五-案例–点和圆的关系"><a href="#五-案例–点和圆的关系" class="headerlink" title="五. 案例–点和圆的关系"></a>五. 案例–点和圆的关系</h2><ul>
+<li>根据点与圆心距离与半径比较，判断点和圆的关系</li>
+<li>略。</li>
+<li><strong>类中可以允许存在类成员变量和函数</strong></li>
+</ul>
 
                 
             </div>
