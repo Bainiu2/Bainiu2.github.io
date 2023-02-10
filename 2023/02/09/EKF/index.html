@@ -4,8 +4,19 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="王正龙的博客">
-    <meta name="description" content="王正龙的博客">
+    <meta name="keywords" content="封装, 王正龙的博客">
+    <meta name="description" content="一、参数准备
+控制变量矩阵 B = 0
+
+状态控制向量 u = 0
+
+卡尔曼增益 K （无需初始化）
+
+观测值 z（外部输入，无需初始化）
+
+先验估计协方差 P
+P = np.diag(np.ones(5))  # 先验估计协方差
+# 主对">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,53 +28,12 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>王正龙的博客</title>
+    <title>封装 | 王正龙的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
 
-    <!-- index cover -->
-    <!-- <link rel="stylesheet preload" type="text/css" href="/css/indexcover.css"> -->
-    <style>
-        .carousel-control {
-            width: 45px;
-            height: 45px;
-            line-height: 55px;
-            border-radius: 45px;
-            background: transparent;
-            cursor: pointer;
-            z-index: 100;
-        }
-        
-        #prev-cover {
-            position: absolute;
-            top: 48%;
-            left: 8px;
-        }
-        
-        #next-cover {
-            position: absolute;
-            top: 48%;
-            right: 8px;;
-        }
-        
-        #prev-cover i {
-            margin-right: 3px;
-        }
-        
-        #next-cover i {
-            margin-left: 3px;
-        }
-        
-        .carousel-control:hover {
-            background-color: rgba(0, 0, 0, .4);
-        }
-        
-        .carousel-control i {
-            color: #fff;
-            font-size: 2.4rem;
-        }
-    </style>
+    <!-- bg-cover style     -->
 
 
 
@@ -84,6 +54,10 @@
 
 
 
+
+    
+        <link rel="stylesheet" type="text/css" href="/css/reward.css">
+    
 
 
 
@@ -372,534 +346,497 @@
     
 
 
-<div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
-    
 
-    <div class="carousel-item  white-text bg-cover about-cover">
-        <div class="container">
-            <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                    subtitle
-                
-            </div>
-
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">封装</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
-</script>
 
 
+<main class="post-container content">
 
-            <div class="cover-btns">
-                <a href="#indexCard" class="waves-effect waves-light btn">
-                    <i class="fa fa-angle-double-down"></i>开始阅读
-                </a>
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/EKF%E5%8E%9F%E7%90%86%E5%8F%8A%E7%94%A8%E6%B3%95/">
+                                <span class="chip bg-color">EKF原理及用法</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E7%B3%BB%E5%88%97%E7%AE%97%E6%B3%95/" class="post-category">
+                                卡尔曼滤波系列算法
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-02-09
+                </div>
+                
 
                 
-                    <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light btn" target="_blank">
-                        <i class="fab fa-github-alt"></i>Github
-                    </a>
+
+                
+
+                
+
                 
             </div>
-            <div class="cover-social-link">
-    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub"
-        data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
-    
+        </div>
+        <hr class="clearfix">
 
         
-            <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我"
-                data-position="top" data-delay="50">
-                <i class="fas fa-envelope-open"></i>
-            </a>
-            
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="一、参数准备"><a href="#一、参数准备" class="headerlink" title="一、参数准备"></a>一、参数准备</h2><ul>
+<li><p>控制变量矩阵 B = 0</p>
+</li>
+<li><p>状态控制向量 u = 0</p>
+</li>
+<li><p>卡尔曼增益 K （无需初始化）</p>
+</li>
+<li><p>观测值 z（外部输入，无需初始化）</p>
+</li>
+<li><p>先验估计协方差 P</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">P <span class="token operator">=</span> np<span class="token punctuation">.</span>diag<span class="token punctuation">(</span>np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># 先验估计协方差</span>
+<span class="token comment"># 主对角线是1，其他为0</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>滤波器输出状态 x = []</p>
+</li>
+<li><p>滤波器预测状态 G = []</p>
+</li>
+<li><p>状态转移矩阵 J_A = []  <strong>与非线性系统的预测机制有关</strong></p>
+</li>
+<li><p>噪声协方差矩阵Q = [] <strong>代表对控制系统的信任程度，预测过程上叠加一个高斯噪声，若希望跟踪的轨迹更光滑，可以调小</strong></p>
+</li>
+<li><p>观测矩阵H <strong>z = H * x, 状态：（坐标x, 坐标y, 速度x, 速度y）,观测值：（坐标x, 坐标y）</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">H <span class="token operator">=</span> np<span class="token punctuation">.</span>eye<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>观测噪声协方差矩阵R <strong>代表对观测数据的信任程度，观测过程中存在一个高斯噪声，若观测结果中的值很准确，可以调小</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">R <span class="token operator">=</span> np<span class="token punctuation">.</span>diag<span class="token punctuation">(</span>np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">0.6</span><span class="token comment"># 主对角线是1，其他为0</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h2 id="二、参数初始化"><a href="#二、参数初始化" class="headerlink" title="二、参数初始化"></a>二、参数初始化</h2><ul>
+<li><p>B = 0</p>
+</li>
+<li><p>u = 0</p>
+</li>
+<li><p>K = null</p>
+</li>
+<li><p>z = null</p>
+</li>
+<li><p>$$<br>P = \left[<br>\matrix{<br>  200 &amp; 0 &amp; 0 &amp; 0 &amp; 0\<br>  0 &amp; 200 &amp; 0 &amp; 0 &amp; 0\<br>  0 &amp; 0 &amp; 10 &amp; 0 &amp; 0\<br>  0 &amp; 0 &amp; 0 &amp; 10 &amp; 0\<br>  0 &amp; 0 &amp; 0 &amp; 0 &amp; 10\<br>}<br>\right]<br>$$</p>
+</li>
+<li><p>$$<br>x = \left[<br>\matrix{<br>  坐标x &amp; 坐标y &amp; 速度 &amp; 航向 &amp; 航向角速度<br>}<br>\right]<br>$$</p>
+</li>
+<li><p>$$<br>G = \left[<br>\matrix{<br>  坐标x &amp; 坐标y &amp; 速度 &amp; 航向 &amp; 航向角速度<br>}<br>\right]<br>$$</p>
+</li>
+<li><p>$$<br>J_A = \left[<br>\matrix{<br>  1 &amp; 0 &amp; \Delta t<em>cos(航向) &amp; -\Delta t</em>v<em>sin(航向) &amp; 0\<br>  0 &amp; 1 &amp; \Delta t</em>sin(航向) &amp; \Delta t<em>v</em>cos(航向) &amp; 0\<br>  0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\<br>  0 &amp; 0 &amp; 0 &amp; 1 &amp; \Delta t\<br>  0 &amp; 0 &amp; 0 &amp; 0 &amp; 1<br>}<br>\right]<br>$$</p>
+</li>
+<li><p>std_noise_a = 3 <strong>纵向加速度噪声</strong></p>
+</li>
+<li><p>std_noise_yaw_dd = 0.3 <strong>偏航角加速度噪声</strong></p>
+</li>
+<li><p>$$<br>Q_v = \left[<br>\matrix{<br>  (std_noise_a)^2  &amp; 0 \<br>  0 &amp; (std_noise_yaw_dd)^2\<br>}<br>\right]=\left[<br>\matrix{<br>  (\sigma_a)^2  &amp; 0 \<br>  0 &amp; (\sigma_{\psi}^{..})^2\<br>}<br>\right]<br>$$</p>
+</li>
+<li><p>$$<br>temp = \left[<br>\matrix{<br>  0.5*(\Delta t)^2<em>cos(航向) &amp; 0\<br>  0.5</em>(\Delta t)^2<em>sin(航向) &amp; 0\<br>  \Delta t &amp; 0 \<br>  0 &amp; 0.5</em>(\Delta t)^2 \<br>  0 &amp; \Delta t \<br>}<br>\right]<br>$$</p>
+</li>
+<li><p>$$<br>Q = (temp.*Q_v) * temp^{T}<br>$$</p>
+</li>
+</ul>
 
                 
+            </div>
+            <hr/>
 
-                        
+            
 
-                                
-                                    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873"
-                                        class="tooltipped" target="_blank"
-                                        data-tooltip="QQ联系我: 1181062873" data-position="top"
-                                        data-delay="50">
-                                        <i class="fab fa-qq"></i>
-                                    </a>
-                                    
-
-                                        
-
-                                                
-
-                                                        
-                                                            <a href="/atom.xml" class="tooltipped"
-                                                                target="_blank" data-tooltip="RSS 订阅"
-                                                                data-position="top" data-delay="50">
-                                                                <i class="fas fa-rss"></i>
-                                                            </a>
-                                                            </div>
-        </div>
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">王正龙</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://bainiu2.github.io/2023/02/09/EKF/">http://bainiu2.github.io/2023/02/09/EKF/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">王正龙</a>
+                    !
+                </span>
+            </div>
+        
     </div>
 
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/EKF%E5%8E%9F%E7%90%86%E5%8F%8A%E7%94%A8%E6%B3%95/">
+                                    <span class="chip bg-color">EKF原理及用法</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
     
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
     $(function () {
-        let coverSlider = $('.carousel');
+        $('.tabs').tabs();
+    });
+</script>
 
-        //用户触摸轮播自动 restartPlay 是否生效
-        let initUserPressedOrDraggedActive = false
-
-        //用户触摸轮播自动 restartPlay
-        function initUserPressedOrDragged(instance) {
-            setInterval(() => {
-                if (instance.pressed || instance.dragged) {
-                    // console.log('initUserPressedOrDragged: ',instance.pressed,instance.dragged)
-                    restartPlay()
-                }
-            }, 1000)
-        }
-
-        coverSlider.carousel({
-            duration: Number('120'),
-            fullWidth: true,
-            indicators: 'true' === 'true',
-            onCycleTo() {
-                if (!initUserPressedOrDraggedActive) {
-                    // console.log('initUserPressedOrDraggedActive')
-                    initUserPressedOrDragged(this)
-                    initUserPressedOrDraggedActive = true
-                }
-            },
-        })
-
-        let carouselIntervalId;
-        
-        // Loop to call the next cover article picture.
-        let autoCarousel = function () {
-            carouselIntervalId = setInterval(function () {
-                coverSlider.carousel('next');
-            }, 5000);
-        };
-        autoCarousel();
-        
-
-        function restartPlay() {
             
-            clearInterval(carouselIntervalId);
-            autoCarousel();
-            
-        };
+        </div>
+    </div>
 
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
         
-        // prev and next cover post.
-        $('#prev-cover').click(function () {
-            coverSlider.carousel('prev');
-            restartPlay();
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/02/09/EKF/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="封装">
+                        
+                        <span class="card-title">封装</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E7%B3%BB%E5%88%97%E7%AE%97%E6%B3%95/" class="post-category">
+                                    卡尔曼滤波系列算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/EKF%E5%8E%9F%E7%90%86%E5%8F%8A%E7%94%A8%E6%B3%95/">
+                        <span class="chip bg-color">EKF原理及用法</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/02/09/%E5%B0%81%E8%A3%85/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="封装">
+                        
+                        <span class="card-title">封装</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%BB%91%E9%A9%ACc-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    黑马c++学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%B0%81%E8%A3%85%E7%9A%84%E6%84%8F%E4%B9%89/">
+                        <span class="chip bg-color">封装的意义</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
         });
-        $('#next-cover').click(function () {
-            coverSlider.carousel('next');
-            restartPlay();
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
         });
         
     });
 </script>
 
-
-
-<main class="content">
-
     
-    <div id="indexCard" class="index-card">
-        <div class="container ">
-            <div class="card">
-                <div class="card-content">
-                    
-                        <div class="dream">
-    
-    <div class="title center-align">
-        <i class="far fa-lightbulb"></i>&nbsp;&nbsp;我的梦想
-    </div>
-    
-    <div class="row">
-        <div class="col l8 offset-l2 m10 offset-m1 s10 offset-s1 center-align text">
-            不是每个人都应该像我这样去建造一座水晶大教堂，但是每个人都应该拥有自己的梦想，设计自己的梦想，追求自己的梦想，实现自己的梦想。梦想是生命的灵魂，是心灵的灯塔，是引导人走向成功的信仰。有了崇高的梦想，只要矢志不渝地追求，梦想就会成为现实，奋斗就会变成壮举，生命就会创造奇迹。——罗伯·舒乐
-        </div>
-    </div>
-</div>
-
-                    
-
-                    
-
-                    
-
-                    
-                    <div id="recommend-sections" class="recommend">
-                        
-
-
-
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    
-
-    
-
-    <!-- 所有文章卡片 -->
-    <article id="articles" class="container articles">
-        <div class="row article-row">
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/02/09/EKF/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="封装">
-                            
-                            <span class="card-title">封装</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                一、参数准备
-控制变量矩阵 B = 0
-
-状态控制向量 u = 0
-
-卡尔曼增益 K （无需初始化）
-
-观测值 z（外部输入，无需初始化）
-
-先验估计协方差 P
-P = np.diag(np.ones(5))  # 先验估计协方差
-# 主对
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E7%B3%BB%E5%88%97%E7%AE%97%E6%B3%95/" class="post-category">
-                                    卡尔曼滤波系列算法
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/EKF%E5%8E%9F%E7%90%86%E5%8F%8A%E7%94%A8%E6%B3%95/">
-                            <span class="chip bg-color">EKF原理及用法</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/02/09/%E5%B0%81%E8%A3%85/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="封装">
-                            
-                            <span class="card-title">封装</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                一. 封装的意义1. 将属性和行为作为一个整体，表现生活中的事物2. 将属性和行为加以权限控制
-语法：class 类名（访问权限：属性/行为）；
-属性使用变量，行为使用函数
-
-3. 属性和行为放在不同的权限中，加以控制访问权限有三种：pub
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E9%BB%91%E9%A9%ACc-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    黑马c++学习笔记
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E5%B0%81%E8%A3%85%E7%9A%84%E6%84%8F%E4%B9%89/">
-                            <span class="chip bg-color">封装的意义</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/02/09/%E6%B0%B4%E4%B8%8B%E7%9B%AE%E6%A0%87%E5%A8%81%E8%83%81%E8%AF%84%E4%BC%B0%E6%80%BB%E7%BB%93/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="水下威胁评估">
-                            
-                            <span class="card-title">水下威胁评估</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                一、主要任务根据状态估计获得的目标的位置和运动状态信息，对水下运动目标（移动声靶、蛙人）进行威胁评估，给出目标对AUV的威胁程度。
-二、威胁评估指标选择距离（AUV与目标）、碰撞风险、航向差、速度差、深度差
-三、主要方法基于结构熵的威胁要素
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                王正龙
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/02/06/C++%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="C++学习路线">
-                            
-                            <span class="card-title">C++学习路线</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                
-
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-06
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                王正龙
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/02/06/%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C%E6%8A%80%E5%B7%A7/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="论文写作技巧">
-                            
-                            <span class="card-title">论文写作技巧</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                一、学术论文两要素：专业的知识、科学的表达1. 专业的知识包括以下特点（你写的这篇文章要具备的要素）
-新颖性：创新点
-
-普适性：提出的方法、理论、发现、实验等不仅适用于单一的情况
-
-学术性：从项目中提炼科学问题
-
-
-2. 科学的表达
-清晰的
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-06
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                王正龙
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/02/06/Typora%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Typora使用方法">
-                            
-                            <span class="card-title">Typora使用方法</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                [TOC]
-一、Markdown纯文本基本语法1. 标题# 一级标题
-## 二级标题
-### 三级标题
-#### 四级标题
-##### 五级标题
-###### 六级标题
-
-注意事项：#号后面要有空格
-
-2. 字体**加粗**
-__加粗__
-
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-06
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-user fa-fw"></i>
-                                王正龙
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-        </div>
-    </article>
 
 </main>
-
-
-<div class="container paging">
-    <div class="row">
-        <div class="col s6 m4 l4">
-            
-            <a class="left btn-floating btn-large disabled">
-                <i class="fas fa-angle-left"></i>
-            </a>
-            
-        </div>
-        <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">1 / 2</div>
-        </div>
-        <div class="col s6 m4 l4">
-            
-            <a href="/page/2/"
-               class="right btn-floating btn-large waves-effect waves-light bg-color">
-                <i class="fas fa-angle-right"></i>
-            </a>
-            
-        </div>
-    </div>
-</div>
 
 
 
