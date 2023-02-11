@@ -372,8 +372,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/EKF%E5%8E%9F%E7%90%86%E5%8F%8A%E7%94%A8%E6%B3%95/">
-                                <span class="chip bg-color">EKF原理及用法</span>
+                            <a href="/tags/%E5%8F%82%E6%95%B0%E5%87%86%E5%A4%87/">
+                                <span class="chip bg-color">参数准备</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%8F%82%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                                <span class="chip bg-color">参数初始化</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89/">
+                                <span class="chip bg-color">函数定义</span>
                             </a>
                         
                     </div>
@@ -548,10 +556,10 @@ R = \left[
 <li><p>更新状态</p></li>
 </ol>
 <p></p><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">update</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>dt<span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> np<span class="token punctuation">.</span><span class="token builtin">abs</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>x<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token number">0.0001</span><span class="token punctuation">:</span>
-        v <span class="token operator">=</span> self<span class="token punctuation">.</span>x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
-        heading <span class="token operator">=</span> self<span class="token punctuation">.</span>control_psi<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-
+    <span class="token keyword">if</span> np<span class="token punctuation">.</span><span class="token builtin">abs</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>x<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token number">0.0001</span><span class="token punctuation">:</span><span class="token comment">#如果航向角速度很小</span>
+        v <span class="token operator">=</span> self<span class="token punctuation">.</span>x<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token comment"># 速度</span>
+        heading <span class="token operator">=</span> self<span class="token punctuation">.</span>control_psi<span class="token punctuation">(</span>self<span class="token punctuation">.</span>x<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token comment"># 航向</span>
+   
         <span class="token comment">###########################################预测部分</span>
         <span class="token comment"># xk_=g(xk,u)</span>
         xk_ <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span>v<span class="token operator">*</span>math<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>heading<span class="token punctuation">)</span><span class="token operator">*</span>dt<span class="token operator">+</span>self<span class="token punctuation">.</span>x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -561,18 +569,18 @@ R = \left[
                         <span class="token number">0.0001</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
         
         self<span class="token punctuation">.</span>G <span class="token operator">=</span> xk_
-
+        <span class="token comment">################更新####################</span>
         v <span class="token operator">=</span> xk_<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
         heading <span class="token operator">=</span> self<span class="token punctuation">.</span>control_psi<span class="token punctuation">(</span>xk_<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
         heading_rate <span class="token operator">=</span> xk_<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span>
-
+        <span class="token comment">###############使用新的航向计算J_A#############</span>
         J_A02 <span class="token operator">=</span> dt<span class="token operator">*</span>np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>heading<span class="token punctuation">)</span> 
         J_A03 <span class="token operator">=</span> <span class="token operator">-</span>dt<span class="token operator">*</span>np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>heading<span class="token punctuation">)</span>
         J_A04 <span class="token operator">=</span> <span class="token number">0</span>
         J_A12 <span class="token operator">=</span> dt<span class="token operator">*</span>np<span class="token punctuation">.</span>sin<span class="token punctuation">(</span>heading<span class="token punctuation">)</span>
         J_A13 <span class="token operator">=</span> dt<span class="token operator">**</span>np<span class="token punctuation">.</span>cos<span class="token punctuation">(</span>heading<span class="token punctuation">)</span>
         J_A14 <span class="token operator">=</span> <span class="token number">0</span>
-
+   
         self<span class="token punctuation">.</span>J_A <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> J_A02<span class="token punctuation">,</span> J_A03<span class="token punctuation">,</span> J_A04<span class="token punctuation">]</span><span class="token punctuation">,</span>
                             <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> J_A12<span class="token punctuation">,</span> J_A13<span class="token punctuation">,</span> J_A14<span class="token punctuation">]</span><span class="token punctuation">,</span>
                             <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
@@ -592,6 +600,7 @@ R = \left[
                         self<span class="token punctuation">.</span>control_psi<span class="token punctuation">(</span>heading_rate <span class="token operator">*</span> dt <span class="token operator">+</span> heading<span class="token punctuation">)</span><span class="token punctuation">,</span>
                         heading_rate<span class="token punctuation">]</span><span class="token punctuation">)</span>
         self<span class="token punctuation">.</span>G <span class="token operator">=</span> xk_
+        <span class="token comment">#############更新##################</span>
         v <span class="token operator">=</span> xk_<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
         heading <span class="token operator">=</span> xk_<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
         heading_rate <span class="token operator">=</span> xk_<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span>
@@ -616,6 +625,7 @@ R = \left[
     temp<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> dt
     temp<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0.5</span> <span class="token operator">*</span> dt <span class="token operator">*</span> dt
     temp<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> dt
+    <span class="token comment">############## 更新Q ########################</span>
     self<span class="token punctuation">.</span>Q <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>temp<span class="token punctuation">,</span> Q_v<span class="token punctuation">)</span><span class="token punctuation">,</span> temp<span class="token punctuation">.</span>T<span class="token punctuation">)</span>
 
     b1<span class="token operator">=</span>np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>self<span class="token punctuation">.</span>J_A<span class="token punctuation">,</span>self<span class="token punctuation">.</span>P<span class="token punctuation">)</span>
@@ -629,7 +639,7 @@ R = \left[
     c4 <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>c3<span class="token punctuation">)</span> <span class="token operator">+</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>self<span class="token punctuation">.</span>R<span class="token punctuation">)</span>
     c5 <span class="token operator">=</span> np<span class="token punctuation">.</span>linalg<span class="token punctuation">.</span>matrix_power<span class="token punctuation">(</span>c4<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
     self<span class="token punctuation">.</span>K <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>c1<span class="token punctuation">,</span> c5<span class="token punctuation">)</span>
-
+   
     <span class="token comment"># Xk = Xk_+Kk(Zk-Hk*Xk_)</span>
     d1 <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>self<span class="token punctuation">.</span>H<span class="token punctuation">,</span> xk_<span class="token punctuation">)</span>
     d2 <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>self<span class="token punctuation">.</span>z<span class="token punctuation">)</span> <span class="token operator">-</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>d1<span class="token punctuation">)</span>
@@ -641,7 +651,7 @@ R = \left[
     e1 <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>self<span class="token punctuation">.</span>K<span class="token punctuation">,</span> self<span class="token punctuation">.</span>H<span class="token punctuation">)</span>
     e2 <span class="token operator">=</span> np<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>e1<span class="token punctuation">,</span> pk_<span class="token punctuation">)</span>
     self<span class="token punctuation">.</span>P <span class="token operator">=</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>pk_<span class="token punctuation">)</span> <span class="token operator">-</span> np<span class="token punctuation">.</span>array<span class="token punctuation">(</span>e2<span class="token punctuation">)</span>
-    <span class="token comment">#print(self.R)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p></p>
+    <span class="token comment">#print(self.R)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p></p>
 <ul>
 <li><p><span class="math display">\[
    航向角小于0.0001时，xk\_ = \left[
@@ -703,16 +713,29 @@ J\_A = \left[
 \right]
 \]</span></p></li>
 <li><p><span class="math display">\[
-b_1 = J\_A*P
-\]</span></p></li>
-<li><p><span class="math display">\[
-b2 = b_1*J\_A^{T}
-\]</span></p></li>
-<li><p><span class="math display">\[
+b_1 = J\_A*P\\
+b_2 = b_1*J\_A^{T}\\
 pk\_ = b_2+Q
 \]</span></p></li>
 <li><p><span class="math display">\[
-c_1 = pk\_*H^T
+c_1 = pk\_*H^T\\
+c_2 = H*pk\_\\
+c_3 = c_2*H^T\\
+c_4 = c_3+R\\
+c_5 = c_4^{-1}\\
+K = c_1*c_5
+\]</span></p></li>
+<li><p><span class="math display">\[
+d_1 = H*xk\_\\
+d_2 = z-d_1\\
+d_3 = K*d_2\\
+x = xk\_+d_3\\
+航向 = control\_psi(航向)\\
+\]</span></p></li>
+<li><p><span class="math display">\[
+e_1 = K*H\\
+e_2 = e_1*pk\_\\
+P = pk\_-e_2
 \]</span></p></li>
 </ul>
 
@@ -779,8 +802,16 @@ c_1 = pk\_*H^T
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/EKF%E5%8E%9F%E7%90%86%E5%8F%8A%E7%94%A8%E6%B3%95/">
-                                    <span class="chip bg-color">EKF原理及用法</span>
+                                <a href="/tags/%E5%8F%82%E6%95%B0%E5%87%86%E5%A4%87/">
+                                    <span class="chip bg-color">参数准备</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%8F%82%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96/">
+                                    <span class="chip bg-color">参数初始化</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89/">
+                                    <span class="chip bg-color">函数定义</span>
                                 </a>
                             
                         </div>
@@ -859,18 +890,17 @@ c_1 = pk\_*H^T
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/09/EKF/">
+                <a href="/2023/02/10/%E5%AF%B9%E8%B1%A1%E7%89%B9%E6%80%A7/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="EKF算法（CTRV运动模型）">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="对象特性">
                         
-                        <span class="card-title">EKF算法（CTRV运动模型）</span>
+                        <span class="card-title">对象特性</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -880,27 +910,50 @@ c_1 = pk\_*H^T
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-09
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-10
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E7%B3%BB%E5%88%97%E7%AE%97%E6%B3%95/" class="post-category">
-                                    卡尔曼滤波系列算法
+                            <a href="/categories/%E9%BB%91%E9%A9%ACc-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    黑马c++学习笔记
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/EKF%E5%8E%9F%E7%90%86%E5%8F%8A%E7%94%A8%E6%B3%95/">
-                        <span class="chip bg-color">EKF原理及用法</span>
+                    <a href="/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%92%8C%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0/">
+                        <span class="chip bg-color">构造函数和析构函数</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%87%BD%E6%95%B0%E7%9A%84%E5%88%86%E7%B1%BB%E4%BB%A5%E5%8F%8A%E8%B0%83%E7%94%A8/">
+                        <span class="chip bg-color">函数的分类以及调用</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%97%B6%E6%9C%BA/">
+                        <span class="chip bg-color">拷贝构造函数调用时机</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%A7%84%E5%88%99/">
+                        <span class="chip bg-color">构造函数调用规则</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D/">
+                        <span class="chip bg-color">深拷贝和浅拷贝</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8/">
+                        <span class="chip bg-color">初始化列表</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%B1%BB%E5%AF%B9%E8%B1%A1%E4%BD%9C%E4%B8%BA%E7%B1%BB%E6%88%90%E5%91%98/">
+                        <span class="chip bg-color">类对象作为类成员</span>
                     </a>
                     
                 </div>
@@ -950,6 +1003,22 @@ c_1 = pk\_*H^T
                     
                     <a href="/tags/%E5%B0%81%E8%A3%85%E7%9A%84%E6%84%8F%E4%B9%89/">
                         <span class="chip bg-color">封装的意义</span>
+                    </a>
+                    
+                    <a href="/tags/class%E5%92%8Cstruct%E7%9A%84%E5%8C%BA%E5%88%AB/">
+                        <span class="chip bg-color">class和struct的区别</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%88%90%E5%91%98%E5%B1%9E%E6%80%A7%E8%AE%BE%E7%BD%AE%E4%B8%BA%E7%A7%81%E6%9C%89/">
+                        <span class="chip bg-color">成员属性设置为私有</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%A1%88%E4%BE%8B-%E8%AE%BE%E8%AE%A1%E7%AB%8B%E6%96%B9%E4%BD%93%E7%B1%BB/">
+                        <span class="chip bg-color">案例-设计立方体类</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%A1%88%E4%BE%8B-%E7%82%B9%E5%92%8C%E5%9C%86%E7%9A%84%E5%85%B3%E7%B3%BB/">
+                        <span class="chip bg-color">案例-点和圆的关系</span>
                     </a>
                     
                 </div>
