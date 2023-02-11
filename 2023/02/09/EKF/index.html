@@ -679,9 +679,10 @@ R = \left[
    \]</span></p></li>
 </ul>
 <p>​</p>
+<p><strong>航向角大于等于0.0001时，</strong></p>
 <ul>
 <li><p><span class="math display">\[
-航向角大于等于0.0001时，xk\_ = \left[
+xk\_ = \left[
 \matrix{
   v/航向角速度*sin(航向角速度*\Delta t+航向)-v *sin(航向)/航向角速度 +
 x[0]\\
@@ -693,14 +694,7 @@ cos(航向) + x[1]\\
 }
 \right]
 \]</span></p></li>
-<li><div class="sourceCode" id="cb1"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>              J_A02 = 1 / 航向角速度 * (sin(dt * 航向角速度 + 航向) - sin(航向))</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>              J_A03 = v / 航向角速度 * (cos(dt * 航向角速度 + 航向) - cos(航向))</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>              J_A04 = (dt * v / 航向角速度) * sin(dt * 航向角速度 + 航向) -(v /(航向角速度 ** 2)) * (</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                          cos(dt * 航向角速度 + 航向) - cos(航向))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>              J_A12 = 1 / 航向角速度 * (cos(航向) - cos(dt * 航向角速度 + 航向))</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>              J_A13 = v / 航向角速度 * (sin(dt * 航向角速度 + 航向) - sin(航向))</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>              J_A14 = (dt * v / 航向角速度 )* cos(dt * 航向角速度 + 航向) - (v/(航向角速度 ** 2)) * (</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                          sin(航向) - sin(dt * 航向角速度 + 航向))</span></code></pre></div></li>
+<li><p><code>txt           J_A02 = 1 / 航向角速度 * (sin(dt * 航向角速度 + 航向) - sin(航向))           J_A03 = v / 航向角速度 * (cos(dt * 航向角速度 + 航向) - cos(航向))           J_A04 = (dt * v / 航向角速度) * sin(dt * 航向角速度 + 航向) -(v /(航向角速度 ** 2)) * (cos(dt * 航向角速度 + 航向) - cos(航向))           J_A12 = 1 / 航向角速度 * (cos(航向) - cos(dt * 航向角速度 + 航向))           J_A13 = v / 航向角速度 * (sin(dt * 航向角速度 + 航向) - sin(航向))           J_A14 = (dt * v / 航向角速度 )* cos(dt * 航向角速度 + 航向) - (v/(航向角速度 ** 2)) * (sin(航向) - sin(dt * 航向角速度 + 航向))</code></p></li>
 <li><p><span class="math display">\[
 J\_A = \left[
 \matrix{
