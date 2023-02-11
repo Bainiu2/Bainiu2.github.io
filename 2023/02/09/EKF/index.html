@@ -662,7 +662,7 @@ R = \left[
      航向 \\
      0.0001 \\
    }
-    \hspace{1cm}\right]
+    \right]
    \]</span></p></li>
 <li><p><span class="math display">\[
    J\_A = \left[
@@ -692,7 +692,7 @@ cos(航向) + x[1]\\
   control\_psi(航向角速度*\Delta t+航向角)\\
   航向角速度
 }
-\hspace{8cm}\right]
+\right]
 \]</span></p></li>
 <li><p><code>txt           J_A02 = 1 / 航向角速度 * (sin(dt * 航向角速度 + 航向) - sin(航向))           J_A03 = v / 航向角速度 * (cos(dt * 航向角速度 + 航向) - cos(航向))           J_A04 = (dt * v / 航向角速度) * sin(dt * 航向角速度 + 航向) -(v /(航向角速度 ** 2)) * (cos(dt * 航向角速度 + 航向) - cos(航向))           J_A12 = 1 / 航向角速度 * (cos(航向) - cos(dt * 航向角速度 + 航向))           J_A13 = v / 航向角速度 * (sin(dt * 航向角速度 + 航向) - sin(航向))           J_A14 = (dt * v / 航向角速度 )* cos(dt * 航向角速度 + 航向) - (v/(航向角速度 ** 2)) * (sin(航向) - sin(dt * 航向角速度 + 航向))</code></p></li>
 <li><p><span class="math display">\[
