@@ -41,6 +41,25 @@
     
     
     <entry>
+      <title>水下机器人技术</title>
+      <link href="/2023/02/10/%E6%B0%B4%E4%B8%8B%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8A%80%E6%9C%AF/"/>
+      <url>/2023/02/10/%E6%B0%B4%E4%B8%8B%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%8A%80%E6%9C%AF/</url>
+      
+        <content type="html"><![CDATA[<h2 id="水下机器人结构">水下机器人结构</h2><ol type="1"><li>耐压舱 电池、导航、控制、传感器</li><li>推进器设计</li></ol><p><img src="https://raw.githubusercontent.com/bainiu2/pictures/main/pictures/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-02-12%20201748.png"></p><ol start="3" type="1"><li>通信技术</li></ol><ul><li><p>有线通信</p><p>光纤通信、以太网通信、载波通信等</p></li><li><p>无线通信</p><p>水声通信、激光通讯、无线电通信、卫星通信等</p></li></ul><ol start="4" type="1"><li>导航定位技术</li></ol><ul><li><p>导航技术</p><p>（1） 基于外部信息的导航</p><p>GPS,USBL,LBL,SBL，<strong>适用于系统在水面航行或在水下航行但有水面支持母船的场合</strong></p><p>（2） 基于自身传感器的导航</p><p><strong>依靠系统内部传感器进行导航不需要外部信号</strong></p><p>捷联惯导系统、航位推算、地形匹配、重力场导航</p></li><li><p>定位技术</p><p>LBL,SBL,USBL <img src="https://raw.githubusercontent.com/bainiu2/pictures/main/pictures/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-02-12%20203742.png"></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 水下机器人 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>指针常量和常量指针</title>
       <link href="/2023/02/10/%E6%8C%87%E9%92%88%E5%B8%B8%E9%87%8F%E5%92%8C%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88/"/>
       <url>/2023/02/10/%E6%8C%87%E9%92%88%E5%B8%B8%E9%87%8F%E5%92%8C%E5%B8%B8%E9%87%8F%E6%8C%87%E9%92%88/</url>
