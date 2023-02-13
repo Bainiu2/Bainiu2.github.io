@@ -8,9 +8,8 @@
     <meta name="description" content="一、主要任务
 根据状态估计获得的目标的位置和运动状态信息，对水下运动目标（移动声靶、蛙人）进行威胁评估，给出目标对AUV的威胁程度。
 二、威胁评估指标选择
-距离（AUV与目标）、碰撞风险、航向差、速度差、深度差
-三、主要方法
-基于结构熵的威">
+距离（AUV与目标）、碰撞风险、航向差、速度差、AUV数量（同类目标数量）
+三、主要">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -409,7 +408,7 @@
                 <h1 id="一主要任务">一、主要任务</h1>
 <p>根据状态估计获得的目标的位置和运动状态信息，对水下运动目标（移动声靶、蛙人）进行威胁评估，给出目标对AUV的威胁程度。</p>
 <h1 id="二威胁评估指标选择">二、威胁评估指标选择</h1>
-<p>距离（AUV与目标）、碰撞风险、航向差、速度差、深度差</p>
+<p>距离（AUV与目标）、碰撞风险、航向差、速度差、AUV数量（同类目标数量）</p>
 <h1 id="三主要方法">三、主要方法</h1>
 <p><strong>基于结构熵的威胁要素权重评估、基于层次分析法威胁评估预测</strong></p>
 <h2 id="数据准备">3.1 数据准备</h2>
@@ -601,6 +600,14 @@ omega <span class="token operator">=</span> <span class="token function">weight_
 <span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p></p>
 <h3 id="最终结果">3.3.5 最终结果</h3>
 <p>0.1924 ， 0.1843 ， 0.1676 ， 0.1623 ， 0.1487， 0.1447</p>
+<h1 id="四总结">四、总结</h1>
+<p>仿真层面：使用仿真系统获取到的数据，假定某一时刻的距离（AUV与目标）、碰撞风险、航向差、速度差、AUV数量，然后计算获得结果。</p>
+<p>实际：需要AUV进行下海实验，获取真实目标的信息</p>
+<p>验证：</p>
+<ol type="1">
+<li><p>理解一：将本实验使用的层次分析法和其他方法（比如主成分分析法）进行对比，验证它的优势。</p></li>
+<li><p>理解二：使用真实目标状态信息算出的威胁评估值和使用状态估计出来的目标状态信息进行比较。</p></li>
+</ol>
 
                 
             </div>
